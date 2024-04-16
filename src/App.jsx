@@ -1,33 +1,56 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
+import TableRow from './components/TableRow'
+
 
 function App() {
-  const [count, setCount] = useState(0)
+
+  const [stockData, setStockData] = useState(null);
+
+  useEffect(() => {
+    fetch(`https://api.gurufocus.com/public/user/${import.meta.env.VITE_REACT_APP_GURU_API_TOKEN}/stock/WMT/summary`)
+        .then(r => r.json())
+        .then(data => setStockData(data))
+}, []);
+
+  console.log(stockData)
+
+
 
   return (
     <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <table>
+        <thead>
+          <tr>
+            <th>Company</th>
+            <th>Ticker</th>
+            <th>Financial Strength</th>
+            <th>Proj 3-5 Yr % Annual Total Return</th>
+            <th>Current PE Ratio</th>
+            <th>Price to Book Value</th>
+            <th>Price/Sales Ratio</th>
+            <th>EPS Growth 5-Year</th>
+            <th>EPS Growth 10-Year</th>
+            <th>Return on Total Capital</th>
+            <th>Return on Shareholders' Equity</th>
+            <th>Free Cash Flow</th>
+            <th>Profit Margin Trail 12 Mo</th>
+            <th>Proj 3-5 Yr % Annual Total Return Rank</th>
+            <th>PE Current Rank</th>
+          </tr>
+        </thead>
+        <tbody>
+          <TableRow stockData={stockData} />
+        </tbody>
+
+      </table>
+
+
+      
+        
+        
     </>
   )
 }
