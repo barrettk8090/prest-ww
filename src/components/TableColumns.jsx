@@ -1,6 +1,6 @@
 
 
-function TableColumns(){
+function TableColumns({columns}){
 
     return(
     <thead>
@@ -20,6 +20,9 @@ function TableColumns(){
             <th>Profit Margin Trail 12 Mo</th>
             <th>Proj 3-5 Yr % Annual Total Return Rank</th>
             <th>PE Current Rank</th>
+            {columns.map((column, index) => (
+        <th key={index}>{column.label}</th>
+      ))}
           </tr>
         </thead>
         )
