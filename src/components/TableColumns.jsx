@@ -8,7 +8,7 @@ function TableColumns({columns}){
             <th>Company</th>
             <th>Ticker</th>
             <th>Financial Strength</th>
-            <th>Proj 3-5 Yr % Annual Total Return</th>
+            <th>Current Price</th>
             <th>Current PE Ratio</th>
             <th>Price to Book Value</th>
             <th>Price/Sales Ratio</th>

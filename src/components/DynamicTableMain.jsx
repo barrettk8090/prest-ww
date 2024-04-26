@@ -13,7 +13,7 @@ function DynamicTableMain() {
       setSelectedOptions(selected);
    };
 
-   const stockSymbols = ["MSFT", "AAPL", "WMT", "GOOGL", "AMZN"];
+   const stockSymbols = ['WMT', 'AAPL', 'GOOGL', 'MSFT', 'AMZN', 'TSLA']
 
    useEffect(() => {
     const fetchStockData = async () => {
@@ -29,7 +29,6 @@ function DynamicTableMain() {
     fetchStockData();
  }, []);
 
-  console.log(stockData)
 
 // Configurations for the react-select component
     const options = [
