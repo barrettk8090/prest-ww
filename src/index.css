@@ -3,9 +3,9 @@
   line-height: 1.5;
   font-weight: 400;
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  /* color-scheme: light dark; */
+  /* color: rgba(255, 255, 255, 0.87);
+  background-color: #242424; */
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -43,6 +43,7 @@ button {
   font-weight: 500;
   font-family: inherit;
   background-color: #1a1a1a;
+  color: white;
   cursor: pointer;
   transition: border-color 0.25s;
 }
@@ -67,6 +68,26 @@ button:focus-visible {
   }
 }
 
-th, td {
-  border: 1px solid white;
+
+table {
+  border-collapse: collapse;
 }
+
+
+tr {
+  border: 1px solid black;
+}
+
+tr:nth-child(even) {
+  background-color: #f2f2f2; /* light gray */
+}
+
+tr:nth-child(odd) {
+  background-color: #ffffff; /* white */
+}
+
+td, th {
+  border: 1px solid black;
+  padding: 0.5em;
+}
+

@@ -19,7 +19,7 @@ function DynamicTableMain() {
     setIsSorted(!isSorted);
 };
 
-   const stockSymbols = ['WMT', 'AAPL', 'GOOGL', 'MSFT', 'AMZN', 'TSLA']
+   const stockSymbols = ['WMT', 'AAPL', 'GOOGL', 'MSFT', 'AMZN', 'TSLA', "NFLX", "WATT"]
 
    useEffect(() => {
     const fetchStockData = async () => {
