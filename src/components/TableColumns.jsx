@@ -1,6 +1,7 @@
 
 
-function TableColumns({columns}){
+function TableColumns({columns, handleSort}){
+
 
     return(
     <thead>
@@ -8,7 +9,7 @@ function TableColumns({columns}){
             <th>Company</th>
             <th>Ticker</th>
             <th>Current Price</th>
-            <th>Current PE Ratio</th>
+            <th>Current PE Ratio <button onClick={handleSort}>Sort: H to L</button></th>
             <th>Price to Book Value</th>
             <th>Price/Sales Ratio</th>
             <th>EPS Growth 1-Year</th>

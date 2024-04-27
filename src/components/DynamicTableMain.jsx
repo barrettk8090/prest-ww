@@ -8,10 +8,16 @@ function DynamicTableMain() {
         
     const [stockData, setStockData] = useState([]);
     const [selectedOptions, setSelectedOptions] = useState([]);
+    const [isSorted, setIsSorted] = useState(false);
   
     const handleChange = (selected) => {
       setSelectedOptions(selected);
    };
+
+  //  Sorts the data based on the PE ratio - highest to lowest for now
+   const handleSort = () => {
+    setIsSorted(!isSorted);
+};
 
    const stockSymbols = ['WMT', 'AAPL', 'GOOGL', 'MSFT', 'AMZN', 'TSLA']
 
@@ -64,9 +70,9 @@ function DynamicTableMain() {
       />
       <button onClick={() => setSelectedOptions([])}>Clear Selection</button>
       <table>
-        <TableColumns columns={selectedOptions}/>
+        <TableColumns columns={selectedOptions} handleSort={handleSort} isSorted={isSorted} setIsSorted={setIsSorted}/>
         <tbody>
-          <TableRow stockData={stockData} />
+          <TableRow stockData={stockData} isSorted={isSorted} setIsSorted={setIsSorted} />
         </tbody>
       </table>
             

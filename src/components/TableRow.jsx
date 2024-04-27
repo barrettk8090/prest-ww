@@ -1,7 +1,21 @@
-function TableRow({ stockData }) {
+import { useState } from "react";
+
+function TableRow({ stockData, isSorted, setIsSorted}) {
+
+
+    const sortedData = [...stockData].sort((a, b) => {
+        if (isSorted) {
+            return a?.summary?.company_data?.pe - b?.summary?.company_data?.pe;
+        } else {
+            return b?.summary?.company_data?.pe - a?.summary?.company_data?.pe;
+        }
+    });
+
+
     return (
         <>
-            {stockData.map((stock, index) => (
+             {/* <button onClick={handleSort}>Sort</button> */}
+            {sortedData.map((stock, index) => (
                 <tr key={index}>
                     <td>{stock?.summary?.general?.company}</td>
                     <td>{stock?.summary?.company_data?.symbol}</td>
