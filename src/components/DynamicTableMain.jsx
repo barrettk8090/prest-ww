@@ -61,14 +61,10 @@ function DynamicTableMain() {
 
     return (
         <div>
-        <Select
-        styles={customStyles}
-        options={options}
-        onChange={handleChange}
-        isMulti
-        value={selectedOptions}
-      />
-      <button onClick={() => setSelectedOptions([])}>Clear Selection</button>
+          <div className="dropdown">
+            <Select styles={customStyles} options={options} onChange={handleChange} isMulti value={selectedOptions} />
+            <button onClick={() => setSelectedOptions([])}>Clear Selection</button>
+          </div>
       <table>
         <TableColumns columns={selectedOptions} handleSort={handleSort} isSorted={isSorted} setIsSorted={setIsSorted}/>
         <tbody>

@@ -31,8 +31,8 @@ function TableRow({ stockData, isSorted, setIsSorted}) {
                     <td>{stock?.summary?.ratio["ROE (%)"].value}%</td>
                     <td>{stock?.summary?.ratio["FCF Growth (%)"].value}%</td>
                     <td>{stock?.summary?.ratio["Net-margin (%)"].value}%</td>
-                    <td>Proij 3=5 Annual; TOtal</td>
-                    <td>PE CUrrent Rank</td>
+                    {/* <td>Proij 3=5 Annual; TOtal</td>
+                    <td>PE CUrrent Rank</td> */}
 
                 </tr>
             ))}
