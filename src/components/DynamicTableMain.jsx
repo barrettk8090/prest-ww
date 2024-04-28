@@ -62,6 +62,7 @@ function DynamicTableMain() {
     return (
         <div>
           <div className="dropdown">
+            <h3>Add additional data:</h3>
             <Select styles={customStyles} options={options} onChange={handleChange} isMulti value={selectedOptions} />
             <button onClick={() => setSelectedOptions([])}>Clear Selection</button>
           </div>
