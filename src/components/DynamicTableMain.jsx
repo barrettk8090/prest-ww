@@ -62,6 +62,11 @@ function DynamicTableMain() {
     return (
         <div>
           <div className="dropdown">
+            <h3> Filters + </h3>
+            <h4> Price to Earnings </h4>
+            <input type="radio" value="Max 10" name="pe" /> Max 10
+            <input type="radio" value="Min 5" name="pe" /> Min 5
+            <input type="radio" value="Between 5 and 10" name="pe" /> Between 5 and 10
             <h3>Add additional data:</h3>
             <Select styles={customStyles} options={options} onChange={handleChange} isMulti value={selectedOptions} />
             <button onClick={() => setSelectedOptions([])}>Clear Selection</button>
