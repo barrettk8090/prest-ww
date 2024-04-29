@@ -92,6 +92,9 @@ function DynamicTableMain() {
             <input type="radio" value="Max 10" name="pe" onChange={handleFilterChange} checked={peFilter === 'Max 10'} /> Max 10
             <input type="radio" value="Min 5" name="pe" onChange={handleFilterChange} checked={peFilter === 'Min 5'} /> Min 5
             <input type="radio" value="Between 5 and 10" name="pe" onChange={handleFilterChange} checked={peFilter === 'Between 5 and 10'} /> Between 5 and 10
+            <h3>Or enter a custom range: NOT YET WORKING</h3>
+            <input type="number" name="peMin" onChange={handleFilterChange} value={peFilter.min} placeholder="0" />
+            <input type="number" name="peMax" onChange={handleFilterChange} value={peFilter.max} placeholder="10"/>
             <button onClick={clearFilter}>Clear Filter</button>
             <h3>Add additional data:</h3>
             <Select styles={customStyles} options={options} onChange={handleChange} isMulti value={selectedOptions} />
