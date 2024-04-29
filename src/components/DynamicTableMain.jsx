@@ -62,7 +62,7 @@ function DynamicTableMain() {
     return (
         <div>
           <div className="dropdown">
-            <h3> Filters + </h3>
+            <h3 className="filter-menu"> Filters + </h3>
             <h4> Price to Earnings </h4>
             <input type="radio" value="Max 10" name="pe" /> Max 10
             <input type="radio" value="Min 5" name="pe" /> Min 5
