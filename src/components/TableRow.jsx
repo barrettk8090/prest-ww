@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-function TableRow({ stockData, isSorted, setIsSorted}) {
+function TableRow({ stockData, isSorted, setIsSorted, peFilter}) {
 
 
     const sortedData = [...stockData].sort((a, b) => {
@@ -11,11 +11,25 @@ function TableRow({ stockData, isSorted, setIsSorted}) {
         }
     });
 
+    const filteredData = sortedData.filter(stock => {
+        const pe = stock?.summary?.company_data?.pe;
+        switch (peFilter) {
+            case 'Max 10':
+                return pe <= 10;
+            case 'Min 5':
+                return pe >= 5;
+            case 'Between 5 and 10':
+                return pe >= 5 && pe <= 10;
+            default:
+                return true; 
+        }
+    });
+
 
     return (
         <>
              {/* <button onClick={handleSort}>Sort</button> */}
-            {sortedData.map((stock, index) => (
+            {filteredData.map((stock, index) => (
                 <tr key={index}>
                     <td>{stock?.summary?.general?.company}</td>
                     <td>{stock?.summary?.company_data?.symbol}</td>

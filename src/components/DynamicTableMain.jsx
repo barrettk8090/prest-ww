@@ -5,10 +5,15 @@ import TableRow from './TableRow'
 import Select from 'react-select'
 
 function DynamicTableMain() {
-        
+    
+    //  API Stock Data
     const [stockData, setStockData] = useState([]);
+    // Dropdown <Select> options
     const [selectedOptions, setSelectedOptions] = useState([]);
+    // Sort state - High to Low PE
     const [isSorted, setIsSorted] = useState(false);
+    // Price to Earnings filter
+    const [peFilter, setPeFilter] = useState('');
   
     const handleChange = (selected) => {
       setSelectedOptions(selected);
@@ -18,6 +23,13 @@ function DynamicTableMain() {
    const handleSort = () => {
     setIsSorted(!isSorted);
 };
+  // Filter state
+  const handleFilterChange = (event) => {
+    setPeFilter(event.target.value);
+  };
+  const clearFilter = () => {
+    setPeFilter('');
+  };
 
    const stockSymbols = ['WMT', 'AAPL', 'GOOGL', 'MSFT', 'AMZN', 'TSLA', "NFLX", "WATT"]
 
@@ -64,9 +76,10 @@ function DynamicTableMain() {
           <div className="dropdown">
             <h3 className="filter-menu"> Filters + </h3>
             <h4> Price to Earnings </h4>
-            <input type="radio" value="Max 10" name="pe" /> Max 10
-            <input type="radio" value="Min 5" name="pe" /> Min 5
-            <input type="radio" value="Between 5 and 10" name="pe" /> Between 5 and 10
+            <input type="radio" value="Max 10" name="pe" onChange={handleFilterChange} checked={peFilter === 'Max 10'} /> Max 10
+            <input type="radio" value="Min 5" name="pe" onChange={handleFilterChange} checked={peFilter === 'Min 5'} /> Min 5
+            <input type="radio" value="Between 5 and 10" name="pe" onChange={handleFilterChange} checked={peFilter === 'Between 5 and 10'} /> Between 5 and 10
+            <button onClick={clearFilter}>Clear Filter</button>
             <h3>Add additional data:</h3>
             <Select styles={customStyles} options={options} onChange={handleChange} isMulti value={selectedOptions} />
             <button onClick={() => setSelectedOptions([])}>Clear Selection</button>
@@ -74,7 +87,7 @@ function DynamicTableMain() {
       <table>
         <TableColumns columns={selectedOptions} handleSort={handleSort} isSorted={isSorted} setIsSorted={setIsSorted}/>
         <tbody>
-          <TableRow stockData={stockData} isSorted={isSorted} setIsSorted={setIsSorted} />
+          <TableRow stockData={stockData} isSorted={isSorted} setIsSorted={setIsSorted} peFilter={peFilter}/>
         </tbody>
       </table>
             
