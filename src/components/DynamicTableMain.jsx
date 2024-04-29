@@ -3,9 +3,12 @@ import DataSelector from './DataSelector'
 import TableColumns from './TableColumns'
 import TableRow from './TableRow'
 import Select from 'react-select'
+import ListOfStocks from "./ListOfStocks"
 
 function DynamicTableMain() {
     
+  const stockSymbols = ListOfStocks();
+
     //  API Stock Data
     const [stockData, setStockData] = useState([]);
     // Dropdown <Select> options
@@ -14,6 +17,12 @@ function DynamicTableMain() {
     const [isSorted, setIsSorted] = useState(false);
     // Price to Earnings filter
     const [peFilter, setPeFilter] = useState('');
+    const pageSize=100;
+    const [page, setPage] = useState(0);
+
+    const handleLoadMore = () => {
+      setPage(page + 1);
+    };
   
     const handleChange = (selected) => {
       setSelectedOptions(selected);
@@ -31,21 +40,25 @@ function DynamicTableMain() {
     setPeFilter('');
   };
 
-   const stockSymbols = ['WMT', 'AAPL', 'GOOGL', 'MSFT', 'AMZN', 'TSLA', "NFLX", "WATT"]
+  //  const stockSymbols = ['WMT', 'AAPL', 'GOOGL', 'MSFT', 'AMZN', 'TSLA', "NFLX", "WATT"]
 
    useEffect(() => {
     const fetchStockData = async () => {
-      const fetchPromises = stockSymbols.map(symbol =>
+      const start = page * pageSize;
+      const end = start + pageSize;
+      const currentSymbols = stockSymbols.slice(start, end);
+
+      const fetchPromises = currentSymbols.map(symbol =>
         fetch(`https://api.gurufocus.com/public/user/${import.meta.env.VITE_REACT_APP_GURU_API_TOKEN}/stock/${symbol}/summary`)
           .then(response => response.json())
       );
 
       const results = await Promise.all(fetchPromises);
-      setStockData(results);
+      setStockData(prevData => [...prevData, ...results]);;
     };
 
     fetchStockData();
- }, []);
+ }, [page]);
 
 
 // Configurations for the react-select component
@@ -84,13 +97,13 @@ function DynamicTableMain() {
             <Select styles={customStyles} options={options} onChange={handleChange} isMulti value={selectedOptions} />
             <button onClick={() => setSelectedOptions([])}>Clear Selection</button>
           </div>
-      <table>
-        <TableColumns columns={selectedOptions} handleSort={handleSort} isSorted={isSorted} setIsSorted={setIsSorted}/>
-        <tbody>
-          <TableRow stockData={stockData} isSorted={isSorted} setIsSorted={setIsSorted} peFilter={peFilter}/>
-        </tbody>
-      </table>
-            
+          <table>
+            <TableColumns columns={selectedOptions} handleSort={handleSort} isSorted={isSorted} setIsSorted={setIsSorted}/>
+            <tbody>
+              <TableRow stockData={stockData} isSorted={isSorted} setIsSorted={setIsSorted} peFilter={peFilter}/>
+            </tbody>
+          </table>
+          <button onClick={handleLoadMore}>Load More</button>
         </div>
     )
 }
